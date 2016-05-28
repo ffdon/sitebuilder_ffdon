@@ -53,9 +53,9 @@ ARCH1="ar71xx-generic"
 #ARCH8=""
 
 # Vorbereitungen
-dir_sitebuilder=pwd
+dir_sitebuilder=`pwd`
 cd ..
-dir_working=pwd
+dir_working=`pwd`
 echo $dir_working
 
 if [ ! -d "$dir_working/gluon" ]; then
