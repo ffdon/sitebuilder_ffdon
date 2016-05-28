@@ -61,7 +61,49 @@ if [ ! -d "$dir_working/gluon" ]; then
   git clone $Gluon_REPO $dir_working/gluon -b $GLUON_COMMIT
 fi
 
+if [ ! -d "$dir_working/gluon/site" ]; then
+  mkdir $dir_working/gluon/site
+fi
+
 if [ ! -d "$dir_working/sites-ffdon" ]; then
   git clone $SITES_REPO $dir_working/sites-ffdon
 fi
 
+for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $DOM10 $DOM11 
+  do
+    cd $dir_working/sites-ffdon
+    git checkout $Domaene 
+    mkdir -p /var/www/html/$Domaene/versions/v$BUILD_NUMBER
+    letzterBefehlErfolgreich;
+    cd $dir_working
+    # Gluon Repo aktualisieren 
+    cd $dir_working/gluon
+    git fetch 
+    git checkout $1
+
+    # Dateien in das Gluon-Repo kopieren
+    # In der site.conf werden hierbei Umgebungsvariablen durch die aktuellen Werte ersetzt
+
+    if [ -d $dir_working/gluon/site  ]; then
+      rm -r $dir_working/gluon/site
+    fi
+
+    mkdir $dir_working/gluon/site 
+
+    cp -r $dir_working/sites-ffdon/site.mk $dir_working/sites-ffdon/site.conf $dir_working/sites-ffdon/modules $dir_working/sites-ffdon/i18n $dir_working/gluon/site
+
+    letzterBefehlErfolgreich;
+
+    for Arch in $ARCH1 $ARCH2 $ARCH3 $ARCH4 $ARCH5 $ARCH6 $ARCH7 $ARCH8
+      do
+        cd $dir_working/gluon 
+        #$DEV_CHAN
+        #$TASKANZAHL
+        #$VERBOSITY
+        make update GLUON_RELEASE=$GLUON_COMMIT GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make clean GLUON_RELEASE=$GLUON_COMMIT GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+
+        #make GLUON_RELEASE=$GLUON_COMMIT GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        echo $Domaene $Arch
+    done
+done
