@@ -30,21 +30,23 @@ VERBOSITY="V=s"
 #nach Domaenenliste
 #https://docs.google.com/spreadsheets/d/1KiK__g-mgvkGOdIDcqCmA2Km_lTHLivv-61mxl2TuKM/edit?usp=sharing
 
-#DOM01="Domaene01"
-#DOM02="Domaene02"
+DOM01="Domaene-01"
+#DOM02="Domaene-02"
 DOM03="Domaene-03"
-#DOM04="Domaene04"
-#DOM05="Domaene05"
-#DOM06="Domaene06"
-#DOM07="Domaene07"
-#DOM08="Domaene08"
-#DOM09="Domaene09"
-#DOM10="Domaene10"
-#DOM11="Domaene11"
+#DOM04="Domaene-04"
+DOM05="Domaene-05"
+#DOM06="Domaene-06"
+DOM07="Domaene-07"
+#DOM08="Domaene-08"
+DOM09="Domaene-09"
+#DOM10="Domaene-10"
+DOM11="Domaene-11"
+#DOM11="Domaene-12"
+#DOM11="Domaene-13"
 
 #zu bauende Architekturen
 ARCH1="ar71xx-generic"
-#ARCH2="ar71xx-nand"
+ARCH2="ar71xx-nand"
 #ARCH3="mpc85xx-generic"
 #ARCH4="x86-generic"
 #ARCH5="x86-kvm_guest"
@@ -103,6 +105,11 @@ for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $D
         #$DEV_CHAN
         #$TASKANZAHL
         #$VERBOSITY
+#echo ###################################################
+echo ***************************************************
+echo *** wir würden jetzt $Domaene $Arch Kompilieren ***
+echo ***************************************************
+#echo ###################################################
         make update GLUON_RELEASE=$GLUON_COMMIT GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         #make clean GLUON_RELEASE=$GLUON_COMMIT GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
 
