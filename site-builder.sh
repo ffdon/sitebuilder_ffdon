@@ -56,10 +56,13 @@ ARCH1="ar71xx-generic"
 dir_sitebuilder=pwd
 cd ..
 dir_working=pwd
+echo $dir_working
 
 if [ ! -d "$dir_working/gluon" ]; then
   git clone $Gluon_REPO $dir_working/gluon -b $GLUON_COMMIT
 fi
+
+echo "FEHLER"
 
 if [ ! -d "$dir_working/gluon/site" ]; then
   mkdir $dir_working/gluon/site
