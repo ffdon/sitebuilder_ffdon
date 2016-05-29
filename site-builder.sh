@@ -21,10 +21,12 @@ BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 DEV_CHAN="stable"
 #DEV_CHAN="experiemtal"
 #DEV_CHAN="beta"
-TASKANZAHL="-j2"
+TASKANZAHL="-j4"
 #TASKANZAHL="-j1"
 #VERBOSITY="V=s"
 VERBOSITY=""
+dir_output="/ffdon/firmware-ffdonV2"
+#dir_output="/var/www/html"
 
 #Zu bauende  Domanen
 #nach Domaenenliste
@@ -32,15 +34,15 @@ VERBOSITY=""
 
 DOM01="Domaene-01"
 #DOM02="Domaene-02"
-DOM03="Domaene-03"
+#DOM03="Domaene-03"
 #DOM04="Domaene-04"
-DOM05="Domaene-05"
+#DOM05="Domaene-05"
 #DOM06="Domaene-06"
-DOM07="Domaene-07"
+#DOM07="Domaene-07"
 #DOM08="Domaene-08"
-DOM09="Domaene-09"
+#DOM09="Domaene-09"
 #DOM10="Domaene-10"
-DOM11="Domaene-11"
+#DOM11="Domaene-11"
 #DOM11="Domaene-12"
 #DOM11="Domaene-13"
 
@@ -78,7 +80,10 @@ for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $D
   do
     cd $dir_working/sites-ffdon
     git checkout $Domaene 
-    mkdir -p /var/www/html/$Domaene/versions/v$BUILD_NUMBER
+#################################################################################################################################
+    mkdir -p $dir_output/$Domaene/versions/v$BUILD_NUMBER
+    #mkdir -p /ffdon/firmware-ffdonV2/$Domaene/versions/v$BUILD_NUMBER
+    #mkdir -p /var/www/html/$Domaene/versions/v$BUILD_NUMBER
     #letzterBefehlErfolgreich;
     cd $dir_working
     # Gluon Repo aktualisieren 
@@ -110,9 +115,13 @@ echo ***************************************************
 echo *** wir würden jetzt $Domaene $Arch Kompilieren ***
 echo ***************************************************
 #echo ###################################################
-        make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        echo "Das war "$Domaene $Arch
+        #make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        #make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        #make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+     
+   echo "Das war "$Domaene $Arch
     done
 done
