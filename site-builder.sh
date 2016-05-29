@@ -15,16 +15,16 @@
 SITES_REPO="https://github.com/ffdon/sites-ffdon.git"
 Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
 GLUON_COMMIT="v2016.1.4"
-BUILD_NUMBER="0.9.9"
+BUILD_NUMBER="0.9.10"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
 DEV_CHAN="stable"
 #DEV_CHAN="experiemtal"
 #DEV_CHAN="beta"
-TASKANZAHL="-j5"
+TASKANZAHL="-j2"
 #TASKANZAHL="-j1"
-VERBOSITY="V=s"
-#VERBOSITY=""
+#VERBOSITY="V=s"
+VERBOSITY=""
 
 #Zu bauende  Domanen
 #nach Domaenenliste
@@ -46,7 +46,7 @@ DOM11="Domaene-11"
 
 #zu bauende Architekturen
 ARCH1="ar71xx-generic"
-ARCH2="ar71xx-nand"
+#ARCH2="ar71xx-nand"
 #ARCH3="mpc85xx-generic"
 #ARCH4="x86-generic"
 #ARCH5="x86-kvm_guest"
@@ -110,10 +110,9 @@ echo ***************************************************
 echo *** wir würden jetzt $Domaene $Arch Kompilieren ***
 echo ***************************************************
 #echo ###################################################
-        make update GLUON_RELEASE=$GLUON_COMMIT GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        #make clean GLUON_RELEASE=$GLUON_COMMIT GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-
-        #make GLUON_RELEASE=$GLUON_COMMIT GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        echo $Domaene $Arch
+        make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        echo "Das war "$Domaene $Arch
     done
 done
