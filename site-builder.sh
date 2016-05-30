@@ -18,33 +18,33 @@ GLUON_COMMIT="v2016.1.4"
 BUILD_NUMBER="0.9.10"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
-DEV_CHAN="stable"
-#DEV_CHAN="experiemtal"
-#DEV_CHAN="beta"
-TASKANZAHL="-j4"
-#TASKANZAHL="-j1"
+## Für die Bracnches  stable und experimental gibt es die Autoupdate-Funktion, 
+#GLUON_BRANCH="stable"
+GLUON_BRANCH="experimental"
+#GLUON_BRANCH="beta"
+#TASKANZAHL="-j4"
+TASKANZAHL="-j1"
 #VERBOSITY="V=s"
 VERBOSITY=""
 dir_output="/ffdon/firmware-ffdonV2"
 #dir_output="/var/www/html"
-
 #Zu bauende  Domanen
 #nach Domaenenliste
 #https://docs.google.com/spreadsheets/d/1KiK__g-mgvkGOdIDcqCmA2Km_lTHLivv-61mxl2TuKM/edit?usp=sharing
 
-DOM01="Domaene-01"
+#DOM01="Domaene-01"
 #DOM02="Domaene-02"
-#DOM03="Domaene-03"
+DOM03="Domaene-03"
 #DOM04="Domaene-04"
-#DOM05="Domaene-05"
+DOM05="Domaene-05"
 #DOM06="Domaene-06"
-#DOM07="Domaene-07"
+DOM07="Domaene-07"
 #DOM08="Domaene-08"
-#DOM09="Domaene-09"
+DOM09="Domaene-09"
 #DOM10="Domaene-10"
-#DOM11="Domaene-11"
+DOM11="Domaene-11"
 #DOM11="Domaene-12"
-#DOM11="Domaene-13"
+DOM11="Domaene-13"
 
 #zu bauende Architekturen
 ARCH1="ar71xx-generic"
@@ -61,6 +61,7 @@ dir_sitebuilder=`pwd`
 cd ..
 dir_working=`pwd`
 echo $dir_working
+SECRET=$dir_working/keys/mgk_secret.key
 
 if [ ! -d "$dir_working/gluon" ]; then
   #echo git clone $Gluon_REPO $dir_working/gluon -b $GLUON_COMMIT
@@ -107,21 +108,31 @@ for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $D
     for Arch in $ARCH1 $ARCH2 $ARCH3 $ARCH4 $ARCH5 $ARCH6 $ARCH7 $ARCH8
       do
         cd $dir_working/gluon 
-        #$DEV_CHAN
-        #$TASKANZAHL
-        #$VERBOSITY
 #echo ###################################################
-echo ***************************************************
-echo *** wir würden jetzt $Domaene $Arch Kompilieren ***
-echo ***************************************************
+#echo ***************************************************
+#echo *** wir würden jetzt $Domaene $Arch Kompilieren ***
+#echo ***************************************************
 #echo ###################################################
         #make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         #make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         #make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH  GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
      
    echo "Das war "$Domaene $Arch
     done
+  # Manifeste erstellen 
+#make manifest GLUON_RELEASE=v2016.1.4 GLUON_BRANCH=experimental GLUON_PRIORITY=0 GLUON_IMAGEDIR=/ffdon/firmware-ffdonV2/Domaene-01/versions/v0.9.10/
+#make manifest GLUON_RELEASE=v2016.1.4 GLUON_BRANCH=experimental GLUON_PRIORITY=0
+  make manifest GLUON_RELEASE=$BUILD_STRING GLUON_BRANCH=experimental GLUON_PRIORITY=0 GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER
+  make manifest GLUON_RELEASE=$BUILD_STRING GLUON_BRANCH=beta GLUON_PRIORITY=1 GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER
+  make manifest GLUON_RELEASE=$BUILD_STRING GLUON_BRANCH=stable GLUON_PRIORITY=3 GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER
+
+  # Manifeste signieren 
+  # sh contrib/sign.sh/home/mgk/workdir/keys/mgk_secret.key /ffdon/firmware-ffdonV2/Domaene-01/versions/v0.9.10/images/sysupgrade/experimental.manifest
+  sh contrib/sign.sh $SECRET $dir_output/$Domaene/versions/v$BUILD_NUMBER/sysupgrade/experimental.manifest
+  sh contrib/sign.sh $SECRET $dir_output/$Domaene/versions/v$BUILD_NUMBER/sysupgrade/beta.manifest
+  sh contrib/sign.sh $SECRET $dir_output/$Domaene/versions/v$BUILD_NUMBER/sysupgrade/stable.manifest
+
 done
