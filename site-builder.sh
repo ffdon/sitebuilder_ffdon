@@ -15,7 +15,7 @@
 SITES_REPO="https://github.com/ffdon/sites-ffdon.git"
 Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
 GLUON_COMMIT="v2016.1.4"
-BUILD_NUMBER="0.9.10"
+BUILD_NUMBER="0.9.11"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
 ## FÃ¼r die Bracnches  stable und experimental gibt es die Autoupdate-Funktion, 
@@ -23,7 +23,8 @@ BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 GLUON_BRANCH="experimental"
 #GLUON_BRANCH="beta"
 #TASKANZAHL="-j4"
-TASKANZAHL="-j1"
+TASKANZAHL="-j3"
+#TASKANZAHL="-j1"
 #VERBOSITY="V=s"
 VERBOSITY=""
 dir_output="/ffdon/firmware-ffdonV2"
@@ -32,7 +33,7 @@ dir_output="/ffdon/firmware-ffdonV2"
 #nach Domaenenliste
 #https://docs.google.com/spreadsheets/d/1KiK__g-mgvkGOdIDcqCmA2Km_lTHLivv-61mxl2TuKM/edit?usp=sharing
 
-#DOM01="Domaene-01"
+DOM01="Domaene-01"
 #DOM02="Domaene-02"
 DOM03="Domaene-03"
 #DOM04="Domaene-04"
@@ -43,8 +44,10 @@ DOM07="Domaene-07"
 DOM09="Domaene-09"
 #DOM10="Domaene-10"
 DOM11="Domaene-11"
-#DOM11="Domaene-12"
-DOM11="Domaene-13"
+#DOM12="Domaene-12"
+DOM13="Domaene-13"
+#DOM14=
+#DOM15=
 
 #zu bauende Architekturen
 ARCH1="ar71xx-generic"
@@ -77,7 +80,7 @@ if [ ! -d "$dir_working/sites-ffdon" ]; then
   git clone $SITES_REPO $dir_working/sites-ffdon
 fi
 
-for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $DOM10 $DOM11 
+for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $DOM10 $DOM11 $DOM12 $DOM13 $DOM14 Â$DOM15
   do
     cd $dir_working/sites-ffdon
     git checkout $Domaene 
