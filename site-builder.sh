@@ -15,7 +15,7 @@
 SITES_REPO="https://github.com/ffdon/sites-ffdon.git"
 Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
 GLUON_COMMIT="v2016.1.4"
-BUILD_NUMBER="0.9.11"
+BUILD_NUMBER="0.9.12"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
 ## FÃ¼r die Bracnches  stable und experimental gibt es die Autoupdate-Funktion, 
