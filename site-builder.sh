@@ -2,13 +2,13 @@
 
 # Script der Community Freifunk-Donau-Ries.de
 # zur Erstellung der Firmware-Images
-# für mehrere Hardware-Architekturen
-# für mehrere Domänen
+# fÃ¼r mehrere Hardware-Architekturen
+# fÃ¼r mehrere DomÃ¤nen
 # 
 ###############################################################################################
 # Buildscript zur Erstellung der Images
 # 
-# Dieses Script holt die passende Gluon-Version von GitHub und überträgt die Gluon-Konfiguration
+# Dieses Script holt die passende Gluon-Version von GitHub und Ã¼bertrÃ¤gt die Gluon-Konfiguration
 #
 ###############################################################################################
 # Konstanten-Belegungen nachvolgender Variablen
@@ -18,7 +18,7 @@ GLUON_COMMIT="v2016.1.4"
 BUILD_NUMBER="0.9.11"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
-## Für die Bracnches  stable und experimental gibt es die Autoupdate-Funktion, 
+## FÃ¼r die Bracnches  stable und experimental gibt es die Autoupdate-Funktion, 
 #GLUON_BRANCH="stable"
 GLUON_BRANCH="experimental"
 #GLUON_BRANCH="beta"
@@ -46,9 +46,14 @@ DOM09="Domaene-09"
 DOM11="Domaene-11"
 #DOM12="Domaene-12"
 DOM13="Domaene-13"
-#DOM14=
-#DOM15=
-
+#DOM14="Domaene-14"
+DOM15="Domaene-15"
+#DOM16="Domaene-16"
+DOM17="Domaene-17"
+#DOM18="Domaene-18"
+DOM19="Domaene-19"
+#DOM20="Domaene-20"
+#DOM11="Domaene-21"
 #zu bauende Architekturen
 ARCH1="ar71xx-generic"
 #ARCH2="ar71xx-nand"
@@ -80,7 +85,7 @@ if [ ! -d "$dir_working/sites-ffdon" ]; then
   git clone $SITES_REPO $dir_working/sites-ffdon
 fi
 
-for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $DOM10 $DOM11 $DOM12 $DOM13 $DOM14 �$DOM15
+for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $DOM10 $DOM11 $DOM12 $DOM13 $DOM14 $DOM15 $DOM16 $DOM17 $DOM18 $DOM19 $DOM20 $DOM21
   do
     cd $dir_working/sites-ffdon
     git checkout $Domaene 
@@ -113,7 +118,7 @@ for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $D
         cd $dir_working/gluon 
 #echo ###################################################
 #echo ***************************************************
-#echo *** wir würden jetzt $Domaene $Arch Kompilieren ***
+#echo *** wir wÃ¼rden jetzt $Domaene $Arch Kompilieren ***
 #echo ***************************************************
 #echo ###################################################
         #make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
