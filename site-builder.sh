@@ -14,7 +14,7 @@
 # Konstanten-Belegungen nachvolgender Variablen
 SITES_REPO="https://github.com/ffdon/sites-ffdon.git"
 Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
-GLUON_COMMIT="v2016.1.4"
+GLUON_COMMIT="v2016.1.5"
 BUILD_NUMBER="0.9.14"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
