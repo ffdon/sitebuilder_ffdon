@@ -23,7 +23,7 @@ BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 GLUON_BRANCH="experimental"
 #GLUON_BRANCH="beta"
 #TASKANZAHL="-j4"
-TASKANZAHL="-j3"
+TASKANZAHL="-j2"
 #TASKANZAHL="-j1"
 #VERBOSITY="V=s"
 VERBOSITY=""
@@ -76,8 +76,11 @@ SECRET=$dir_working/keys/mgk_secret.key
 
 if [ ! -d "$dir_working/gluon" ]; then
   #echo git clone $Gluon_REPO $dir_working/gluon -b $GLUON_COMMIT
-  echo git clone $Gluon_REPO -b $GLUON_COMMIT
-  git clone $Gluon_REPO -b $GLUON_COMMIT
+#  echo git clone $Gluon_REPO -b $GLUON_COMMIT
+#  git clone $Gluon_REPO -b $GLUON_COMMIT
+  git clone $Gluon_REPO
+  cd gluon
+  git checkout $GLUON_COMMIT
 fi
 
 if [ ! -d "$dir_working/gluon/site" ]; then
