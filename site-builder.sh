@@ -55,13 +55,23 @@ DOM19="Domaene-19"
 #DOM20="Domaene-20"
 #DOM11="Domaene-21"
 #zu bauende Architekturen
+### unter 2016.1.5 wirft ein ... aus:
+###mgk@gw03:~/workdir/gluon$ make
+###Please set GLUON_TARGET to a valid target. Gluon supports the following targets:
+### * ar71xx-generic
+### * ar71xx-nand
+### * mpc85xx-generic
+### * x86-generic
+### * x86-kvm_guest
+### * x86-64
+## * x86-xen_domu
 ARCH1="ar71xx-generic"
 ARCH2="ar71xx-nand"
-#ARCH3="brcm2708-bcm2708"
-#ARCH4="brcm2708-bcm2709"
+### geht nicht #ARCH3="brcm2708-bcm2708"
+### geht nicht #ARCH4="brcm2708-bcm2709"
 ARCH5="mpc85xx-generic"
-#ARCH6="ramips-rt305x"
-#ARCH7="sunxi"
+### geht nicht #ARCH6="ramips-rt305x"
+### geht nicht #ARCH7="sunxi"
 ARCH8="x86-64"
 ARCH9="x86-generic"
 ARCH10="x86-kvm_guest"
