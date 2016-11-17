@@ -14,8 +14,8 @@
 # Konstanten-Belegungen nachvolgender Variablen
 SITES_REPO="https://github.com/ffdon/sites-ffdon.git"
 Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
-GLUON_COMMIT="v2016.1.6"
-BUILD_NUMBER="0.9.27"
+GLUON_COMMIT="v2016.2.1"
+BUILD_NUMBER="0.9.29"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
 ## FÃ¼r die Bracnches  stable und experimental gibt es die Autoupdate-Funktion, 
