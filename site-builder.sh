@@ -14,7 +14,9 @@
 # Konstanten-Belegungen nachvolgender Variablen
 SITES_REPO="https://github.com/ffdon/sites-ffdon.git"
 Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
-GLUON_COMMIT="v2016.2.1"
+#GLUON_COMMIT="v2016.2.1"
+GLUON_COMMIT="v2016.2"
+#GLUON_COMMIT="v2016.2.1"
 BUILD_NUMBER="0.9.29"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
@@ -34,30 +36,26 @@ dir_output="/ffdon"
 #https://docs.google.com/spreadsheets/d/1KiK__g-mgvkGOdIDcqCmA2Km_lTHLivv-61mxl2TuKM/edit?usp=sharing
 
 DOM01="Domaene-01"
-#DOM02="Domaene-02"
-DOM03="Domaene-03"
-#DOM04="Domaene-04"
-DOM05="Domaene-05"
-#DOM06="Domaene-06"
-DOM07="Domaene-07"
-#DOM08="Domaene-08"
-DOM09="Domaene-09"
-#DOM10="Domaene-10"
-DOM11="Domaene-11"
-#DOM12="Domaene-12"
-DOM13="Domaene-13"
-#DOM14="Domaene-14"
-DOM15="Domaene-15"
-#DOM16="Domaene-16"
-DOM17="Domaene-17"
-#DOM18="Domaene-18"
-DOM19="Domaene-19"
-#DOM20="Domaene-20"
-#DOM11="Domaene-21"
+#DOM03="Domaene-03"
+#DOM05="Domaene-05"
+#DOM07="Domaene-07"
+#DOM09="Domaene-09"
+#DOM11="Domaene-11"
+#DOM13="Domaene-13"
+#DOM15="Domaene-15"
+#DOM17="Domaene-17"
+#DOM19="Domaene-19"
 #zu bauende Architekturen
 ### unter 2016.1.5 wirft ein ... aus:
 ###mgk@gw03:~/workdir/gluon$ make
 ###Please set GLUON_TARGET to a valid target. Gluon supports the following targets:
+ARCH1="ar71xx-generic"
+#ARCH2="ar71xx-nand"
+#ARCH5="mpc85xx-generic"
+#ARCH8="x86-64"
+#ARCH9="x86-generic"
+#ARCH10="x86-kvm_guest"
+#ARCH11="x86-xen_domu"
 ### * ar71xx-generic
 ### * ar71xx-nand
 ### * mpc85xx-generic
@@ -65,17 +63,10 @@ DOM19="Domaene-19"
 ### * x86-kvm_guest
 ### * x86-64
 ## * x86-xen_domu
-ARCH1="ar71xx-generic"
-ARCH2="ar71xx-nand"
 ### geht nicht #ARCH3="brcm2708-bcm2708"
 ### geht nicht #ARCH4="brcm2708-bcm2709"
-ARCH5="mpc85xx-generic"
 ### geht nicht #ARCH6="ramips-rt305x"
 ### geht nicht #ARCH7="sunxi"
-ARCH8="x86-64"
-ARCH9="x86-generic"
-ARCH10="x86-kvm_guest"
-ARCH11="x86-xen_domu"
 
 # Vorbereitungen
 dir_sitebuilder=`pwd`
