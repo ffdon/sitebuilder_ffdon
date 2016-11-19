@@ -30,8 +30,9 @@ GLUON_BRANCH="stable"
 # TASKANZAHL="-j5"
 #TASKANZAHL="-j2"
 TASKANZAHL="-j1"
-VERBOSITY="V=s"
+#VERBOSITY="V=s"
 #VERBOSITY=""
+VERBOSITY="V=99"
 dir_output="/ffdon"
 #dir_output="/var/www/html"
 #Zu bauende  Domaenen
@@ -131,13 +132,25 @@ for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $D
 #echo *** wir wÃ¼rden jetzt $Domaene $Arch Kompilieren ***
 #echo ***************************************************
 #echo ###################################################
+
+echo $dir_working/make.log
+
+#echo "Drücken Sie eine beliebige Taste ... "
+#stty -icanon -echo min 1 time 0
+#dd bs=1 count=1 >/dev/null 2>&1
+#stty stty -g
+#echo
+
+
         #make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         #make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         #make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH  GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-     
+#        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY    2>&1 | tee $dir_working/make_v$BUILD_NUMBER$(date +%y%m%d_%H%M).log   
+#        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY    2>&1 | tee $dir_working/make.log
+
    echo "Das war "$Domaene $Arch
     done
   # Manifeste erstellen 
