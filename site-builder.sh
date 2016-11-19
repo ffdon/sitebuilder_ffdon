@@ -2,8 +2,8 @@
 
 # Script der Community Freifunk-Donau-Ries.de
 # zur Erstellung der Firmware-Images
-# fÃ¼r mehrere Hardware-Architekturen
-# fÃ¼r mehrere DomÃ¤nen
+# fuer mehrere Hardware-Architekturen
+# fuer mehrere Domaenen
 # 
 ###############################################################################################
 # Buildscript zur Erstellung der Images
@@ -15,23 +15,26 @@
 SITES_REPO="https://github.com/ffdon/sites-ffdon.git"
 Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
 #GLUON_COMMIT="v2016.2.1"
-GLUON_COMMIT="v2016.2"
-#GLUON_COMMIT="v2016.2.1"
+#GLUON_COMMIT="v2016.2"
+GLUON_COMMIT="v2016.2.1"
 BUILD_NUMBER="0.9.29"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
-## FÃ¼r die Bracnches  stable und experimental gibt es die Autoupdate-Funktion, 
+## Fuer die Branches  stable und experimental gibt es die Autoupdate-Funktion, 
 GLUON_BRANCH="stable"
+## sobald wir auf ein Release wie z.B. v2016.2.1 zurückgreifen ist der Branch stable
 #GLUON_BRANCH="experimental"
 #GLUON_BRANCH="beta"
-TASKANZAHL="-j5"
+## beim ersten Durchgang sollte  nur ein -j1 gefahren werden, da es hier warscheinlicher ist alle Quellen rechtzeitig zu erreichen
+## https://forum.freifunk.net/t/fehler-beim-bauen/11773
+# TASKANZAHL="-j5"
 #TASKANZAHL="-j2"
-#TASKANZAHL="-j1"
-#VERBOSITY="V=s"
-VERBOSITY=""
+TASKANZAHL="-j1"
+VERBOSITY="V=s"
+#VERBOSITY=""
 dir_output="/ffdon"
 #dir_output="/var/www/html"
-#Zu bauende  Domanen
+#Zu bauende  Domaenen
 #nach Domaenenliste
 #https://docs.google.com/spreadsheets/d/1KiK__g-mgvkGOdIDcqCmA2Km_lTHLivv-61mxl2TuKM/edit?usp=sharing
 
@@ -111,7 +114,7 @@ for Domaene in $DOM01 $DOM02 $DOM03 $DOM04 $DOM05 $DOM06 $DOM07 $DOM08 $DOM09 $D
     # In der site.conf werden hierbei Umgebungsvariablen durch die aktuellen Werte ersetzt
 
     if [ -d $dir_working/gluon/site  ]; then
-      rm -r $dir_working/gluon/site
+      rm -rf $dir_working/gluon/site
     fi
 
     mkdir $dir_working/gluon/site 
