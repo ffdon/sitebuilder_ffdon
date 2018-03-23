@@ -16,8 +16,8 @@ SITES_REPO="https://github.com/ffdon/sites-ffdon.git"
 Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
 #GLUON_COMMIT="v2016.2.1"
 #GLUON_COMMIT="v2016.2"
-GLUON_COMMIT="v2017.1.5"
-BUILD_NUMBER="0.9.39"
+GLUON_COMMIT="v2016.2.2"
+BUILD_NUMBER="0.9.34"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
 ## Fuer die Branches  stable und experimental gibt es die Autoupdate-Funktion, 
@@ -39,8 +39,8 @@ dir_output="/ffdon"
 #nach Domaenenliste
 #https://docs.google.com/spreadsheets/d/1KiK__g-mgvkGOdIDcqCmA2Km_lTHLivv-61mxl2TuKM/edit?usp=sharing
 
-DOM01="Domaene-01"
-#DOM03="Domaene-03"
+#DOM01="Domaene-01"
+DOM03="Domaene-03"
 #DOM05="Domaene-05"
 #DOM07="Domaene-07"
 #DOM09="Domaene-09"
@@ -147,7 +147,7 @@ echo $dir_working/make.log
         #make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_IMAGEDIR=/var/www/html/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         make update GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH  GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
         make clean GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
-        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
+        make BROKEN=1 GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY
 #        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY    2>&1 | tee $dir_working/make_v$BUILD_NUMBER$(date +%y%m%d_%H%M).log   
 #        make GLUON_RELEASE=$BUILD_STRING GLUON_TARGET=$Arch GLUON_BRANCH=$GLUON_BRANCH GLUON_IMAGEDIR=$dir_output/$Domaene/versions/v$BUILD_NUMBER $TASKANZAHL $VERBOSITY    2>&1 | tee $dir_working/make.log
 
