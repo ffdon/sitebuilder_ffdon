@@ -17,7 +17,7 @@ Gluon_REPO="https://github.com/freifunk-gluon/gluon.git gluon"
 #GLUON_COMMIT="v2016.2.1"
 #GLUON_COMMIT="v2016.2"
 GLUON_COMMIT="v2017.1.5"
-BUILD_NUMBER="0.9.39"
+BUILD_NUMBER="0.9.40"
 BUILD_STRING=$GLUON_COMMIT"+"$BUILD_NUMBER
 #echo $BUILD_STRING
 ## Fuer die Branches  stable und experimental gibt es die Autoupdate-Funktion, 
