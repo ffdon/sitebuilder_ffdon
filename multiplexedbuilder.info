@@ -1,0 +1,15 @@
+Für einen sauberen Neustart des Multiplexed Builders:
+
+Cleanup:
+rm /var/builddir/workdir/states/*
+rm /var/builddir/workdir/targets/*.joblist
+
+Start des tmuxinators
+aus z.B.: /home/mgk/builder
+tmuxinator ./.tmuxinator.yml
+
+danach sollen auf der tmux-seite 2:worker in den 10 Windows nur der Waiter blinken
+
+auf der 0:main-seite lönnen wir noch einmal die  multiplexedbuilder.bash bearbeiten
+
+

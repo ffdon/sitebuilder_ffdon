@@ -1,0 +1,135 @@
+# ~/.tmuxinator/multiplexedbuilder.yml
+
+name: multiplexedbuilder
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: editor
+
+# Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+# startup_pane: 1
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t multiplexedbuilder
+
+windows:
+  - main:
+    - cd /var/builddir/workdir/builder && clear && pwd
+  - monitor:
+      layout: main-horizontal
+      panes:
+        - p1:
+          - printf '\033]2;%s\033\\' 'status'
+          - cd /var/builddir/workdir/targets && clear && pwd
+        - p2:
+          - printf '\033]2;%s\033\\' 'htop'
+          - htop
+  - worker:
+          # layout: main-horizontal
+      panes:
+        - p01:
+          - printf '\033]2;%s\033\\' 'ar71xx-generic'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 6 7 ar71xx-generic
+#        - p02:
+#          - printf '\033]2;%s\033\\' 'ar71xx-mikrotik'
+#          - sleep 1 && clear && /var/builddir/workdir/builder/waiter.bash 6 7 ar71xx-mikrotik
+        - p03:
+          - printf '\033]2;%s\033\\' 'ar71xx-nand'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 4 5 ar71xx-nand
+        - p04:
+          - printf '\033]2;%s\033\\' 'ar71xx-tiny'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 7 8 ar71xx-tiny
+        - p05:
+          - printf '\033]2;%s\033\\' 'brcm2708-bcm2708'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 4 5 brcm2708-bcm2708
+        - p06:
+          - printf '\033]2;%s\033\\' 'brcm2708-bcm2709'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 5 6 brcm2708-bcm2709
+#        - p07:
+#          - printf '\033]2;%s\033\\' 'generic'
+#          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 7 8 generic
+#        - p08:
+#          - printf '\033]2;%s\033\\' 'ipq806x'
+#          - sleep 1 && clear && /var/builddir/workdir/builder/waiter.bash 7 8 ipq806x
+        - p09:
+          - printf '\033]2;%s\033\\' 'mpc85xx-generic'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 5 6 mpc85xx-generic
+#        - p10:
+#          - printf '\033]2;%s\033\\' 'mvebu'
+#          - sleep 1 && clear && /var/builddir/workdir/builder/waiter.bash 4 5 mvebu
+        - p11:
+          - printf '\033]2;%s\033\\' 'ramips-mt7621'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 6 7 ramips-mt7621
+#        - p12:
+#          - printf '\033]2;%s\033\\' 'ramips-mt7628'
+#          - sleep 1 && clear && /var/builddir/workdir/builder/waiter.bash 5 6 ramips-mt7628
+#        - p13:
+#          - printf '\033]2;%s\033\\' 'ramips-rt305x'
+#          - sleep 1 && clear && /var/builddir/workdir/builder/waiter.bash 6 7 ramips-rt305x
+#        - p14:
+#          - printf '\033]2;%s\033\\' 'sunxi'
+#          - sleep 1 && clear && /var/builddir/workdir/builder/waiter.bash 7 8 sunxi
+        - p15:
+          - printf '\033]2;%s\033\\' 'x86-64'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 7 8 x86-64
+        - p16:
+          - printf '\033]2;%s\033\\' 'x86-generic'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 4 5 x86-generic
+        - p17:
+          - printf '\033]2;%s\033\\' 'x86-geode'
+          - cd /var/builddir/workdir/targets && /var/builddir/workdir/builder/waiter.bash 5 6 x86-geode
+
+
+#'ar71xx-generic'   
+#'ar71xx-tiny'       
+#'generic'          
+#'mvebu'          
+#'ramips-rt305x'  
+#'x86-64'
+              
+#'ar71xx-mikrotik'  
+#'brcm2708-bcm2708'  
+#'ipq806x'          
+#'ramips-mt7621'  
+#'sunxi'          
+#'x86-generic'
+
+#'ar71xx-nand'      
+#'brcm2708-bcm2709'  
+#'mpc85xx-generic'  
+#'ramips-mt7628'  
+            #targets.mk     
+#'x86-geode'
+
+          #        - echo worker 1
+          #        - echo worker 2
+          #        - echo worker 3
+          #        - echo worker 4     
+          # - editor:
+          #    layout: main-vertical
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      #panes:
+              #- vim
+          # - guard
+          #- server: bundle exec rails s
+    #  - logs: tail -f log/development.log
